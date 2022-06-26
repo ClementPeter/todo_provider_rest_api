@@ -1,0 +1,3 @@
+/*Provider folder stores the providers variables and functions that chages overtime
+Providers that communicate witth the app
+*/
