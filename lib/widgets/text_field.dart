@@ -23,10 +23,18 @@ Widget customTextField({
       //TextField Section
       Container(
         alignment: Alignment.centerLeft,
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: lightGrey,
+        ),
         child: TextFormField(
           controller: controller,
           maxLines: maxLines,
+          decoration: InputDecoration(hintText: hint, border: InputBorder.none),
         ),
+        // decoration: ,
       ),
     ],
   );

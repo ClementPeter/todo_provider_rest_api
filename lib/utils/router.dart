@@ -7,7 +7,7 @@ class PageNavigator {
   //PageNavigator variable and  Constructor
   BuildContext? ctx;
 
-  PageNavigator([this.ctx]);
+  PageNavigator({this.ctx});
 
   //Navigate to nect page using Cupertino page Route
   Future nextPage(Widget? page) {

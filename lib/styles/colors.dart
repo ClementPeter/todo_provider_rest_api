@@ -12,7 +12,7 @@ Color green = const Color(0Xff009120);
 
 Color grey = const Color(0Xff777777);
 
-Color lightgrey = const Color(0XffF5F5F5);
+Color lightGrey = const Color(0XffD3D3D3);
 
 Color white = const Color(0XffFFFFFF);
 
