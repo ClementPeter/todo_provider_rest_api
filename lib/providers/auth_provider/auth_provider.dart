@@ -18,7 +18,7 @@ class Authentication extends ChangeNotifier {
   bool _isLoading = false;
   String _responseMessage = " ";
 
-  //Function to perform Registration
+  //Function to perform  Registration for new users
   // accepts various named parameters
   void registerUser({
     required String firstName,
@@ -32,6 +32,7 @@ class Authentication extends ChangeNotifier {
 
     String url = "$requestBaseUrl/users/";
 
+    //body ---A map that is going to be passed to the POST request as "body"
     final body = {
       'firstName': firstName,
       'lastName': lastName,
@@ -40,12 +41,12 @@ class Authentication extends ChangeNotifier {
     };
     print(body);
 
-    //Making HTTP calls (POST) inside TRY-CATCH BLOCK
+    //Making HTTP call (POST) request inside TRY-CATCH BLOCK
     try {
       http.Response request =
           await http.post(Uri.parse(url), body: json.encode(body));
 
-      //  //HTTP checks
+      //HTTP checks for a success request
       if (request.statusCode == 200 || request.statusCode == 201) {
         final response = json.decode(request.body);
         print(response.body);
@@ -53,9 +54,7 @@ class Authentication extends ChangeNotifier {
 
         _isLoading = false;
         _responseMessage = 'Account Created';
-          notifyListeners();       
-
-        
+          notifyListeners();        
 
         //print(req);
 
@@ -69,10 +68,11 @@ class Authentication extends ChangeNotifier {
       }
     } on SocketException 
     catch (_) {
-    //isLoading = false;
-    _responseMessage = 'Internet not available ';
+    _isLoading = false;
+    _responseMessage = 'Internet not available';
+    notifyListeners();
     } catch(e){
-      print(e);
+      print(':::: $e');
     }
   }
 }
