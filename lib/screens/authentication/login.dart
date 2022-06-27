@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_provider_rest_api/providers/auth_provider/auth_provider.dart';
 import 'package:todo_provider_rest_api/screens/authentication/register.dart';
 import 'package:todo_provider_rest_api/styles/colors.dart';
 import 'package:todo_provider_rest_api/utils/router.dart';
@@ -58,11 +59,16 @@ class _LoginPageState extends State<LoginPage> {
                     controller: _password,
                   ),
                   //Button
-                  customButton(
-                    text: 'Login',
-                    tap: () {},
-                    context: context,
-                    status: false,
+                  Consumer<AuthenticationProvider>(
+                    //stream: null,
+                    builder: (context, auth, child) {
+                      return customButton(
+                        text: 'Login',
+                        tap: () {},
+                        context: context,
+                        status: false,
+                      );
+                    }
                   ),
                   GestureDetector(
                     onTap: () {

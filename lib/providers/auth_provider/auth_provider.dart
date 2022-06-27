@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:todo_provider_rest_api/constants/constants.dart';
+/*Provider folder stores the providers variables and functions that chages overtime
+Providers that communicate witth the app
+*/
 
 //Login / Authentication login using Auth Provider class  hold the to create a new user and login funtionalities
 
@@ -29,6 +32,8 @@ class AuthenticationProvider extends ChangeNotifier {
     required String password,
     BuildContext? context,
   }) async {
+
+    //When registerUser function is triggerred isLoading becomes TRUE
     _isLoading = true;
     notifyListeners();
 
