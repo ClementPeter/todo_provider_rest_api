@@ -6,6 +6,7 @@ import 'package:todo_provider_rest_api/utils/router.dart';
 import 'package:todo_provider_rest_api/widgets/button.dart';
 import 'package:todo_provider_rest_api/widgets/text_field.dart';
 
+import 'providers/auth_provider/auth_provider.dart'; 
 //Login Page will contain 2 textfield w
 
 class LoginPage extends StatefulWidget {
@@ -64,7 +65,22 @@ class _LoginPageState extends State<LoginPage> {
                     builder: (context, auth, child) {
                       return customButton(
                         text: 'Login',
-                        tap: () {},
+                        tap: () {
+                          if(email.text.isEmpty || password.text.isEmpty){
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text('Error'),
+                                content: Text('Please enter all fields'),
+                                actions: [
+                                  FlatButton(
+                                    child: Text('Ok'),
+                                    onPressed: () => Navigator.pop(context),
+                                  )
+                                ],
+                              ),
+                            );
+                        },
                         context: context,
                         status: false,
                       );
