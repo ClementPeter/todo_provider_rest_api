@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //Since we are using more than one provider in our app we'll use a MultiProvider to contain all of them
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
-      ],
+      // providers: [
+      //   ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
+      // ],
     );
   }
 }
