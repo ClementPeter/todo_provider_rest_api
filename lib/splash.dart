@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return const Scaffold(
       body: Center(
         child: FlutterLogo(
-          size: 100,
+          size: 100
         ),
       ),
     );
@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        PageNavigator(ctx: context).nextPageOnly(LoginPage());
+        PageNavigator(ctx: context).nextPageOnly( const LoginPage());
       },
     );
   }
