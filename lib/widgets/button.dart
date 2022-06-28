@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_provider_rest_api/styles/colors.dart';
 
-//Custom Button with named parameters that returns a Gesture Detector
+//Custom Button for login and register with named parameters that returns a Gesture Detector
 //tap : Navigate to next page
 //status : checks the status of button -- status reacts based on the isLoading Value
 Widget customButton({
