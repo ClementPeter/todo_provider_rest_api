@@ -9,7 +9,7 @@ Providers that communicate witth the app
 
 //Login / Authentication login using Auth Provider class  hold the to create a new user and login funtionalities
 
-//ChangeNotifier enables us to use notifyListerners-- 
+//ChangeNotifier enables us to use notifyListerners--
 //This AuthProvider class is a clss we will use as a provider in our main.dar to listen to registration and login events
 class AuthenticationProvider extends ChangeNotifier {
   //
@@ -32,7 +32,6 @@ class AuthenticationProvider extends ChangeNotifier {
     required String password,
     BuildContext? context,
   }) async {
-
     //When registerUser function is triggerred isLoading becomes TRUE
     _isLoading = true;
     notifyListeners();
@@ -49,7 +48,7 @@ class AuthenticationProvider extends ChangeNotifier {
     print(body);
 
     //Making HTTP call to REGISTER a user... (POST) request inside TRY-CATCH BLOCK
-    //Create new usr is a POST request from the backend 
+    //Create new usr is a POST request from the backend
     try {
       http.Response request =
           await http.post(Uri.parse(url), body: json.encode(body));
@@ -62,33 +61,33 @@ class AuthenticationProvider extends ChangeNotifier {
 
         _isLoading = false;
         _responseMessage = 'Account Created';
-        notifyListeners();   
+        notifyListeners();
         //print(req);
 
       } else {
+        //if there is error--- get the body of response
         final response = json.decode(request.body);
+        //fetching out the error message by plugging into the json
+        _responseMessage = response['massage'];
         print(response.body);
         print("404 _ not found");
 
         _isLoading = false;
         notifyListeners();
       }
-    } on SocketException 
-    catch (_) {
-    _isLoading = false;
-    _responseMessage = 'Internet not available';
-    notifyListeners();
-    } catch(e){
+    } on SocketException catch (_) {
+      _isLoading = false;
+      _responseMessage = 'Internet not available';
+      notifyListeners();
+    } catch (e) {
       print(':::: $e');
     }
   }
-
 
   //Login user
   //Function to perform  Registration for new users
   // accepts various named parameters
   void loginUser({
- 
     required String email,
     required String password,
     BuildContext? context,
@@ -100,14 +99,13 @@ class AuthenticationProvider extends ChangeNotifier {
 
     //body ---A map that is going to be passed to the POST request as "body"
     final body = {
-  
       'email': email,
       'password': password,
     };
     print(body);
 
     //Making HTTP call to LOGIN a user... (POST) request inside TRY-CATCH BLOCK
-    //Create new usr is a POST request from the backend 
+    //Create new usr is a POST request from the backend
     try {
       http.Response request =
           await http.post(Uri.parse(url), body: json.encode(body));
@@ -120,7 +118,7 @@ class AuthenticationProvider extends ChangeNotifier {
 
         _isLoading = false;
         _responseMessage = 'Account Logged In';
-        notifyListeners();   
+        notifyListeners();
         //print(req);
 
       } else {
@@ -131,13 +129,19 @@ class AuthenticationProvider extends ChangeNotifier {
         _isLoading = false;
         notifyListeners();
       }
-    } on SocketException 
-    catch (_) {
-    _isLoading = false;
-    _responseMessage = 'Internet not available';
-    notifyListeners();
-    } catch(e){
+    } on SocketException catch (_) {
+      _isLoading = false;
+      _responseMessage = 'Internet not available';
+      notifyListeners();
+    } catch (e) {
       print(':::: $e');
     }
+  }
+
+  //function to clear the response message
+  void clear() {
+    _responseMessage = "";
+    //_isLoading = false;
+    notifyListeners();
   }
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_provider_rest_api/providers/auth_provider/auth_provider.dart';
 import 'package:todo_provider_rest_api/screens/authentication/register.dart';
 import 'package:todo_provider_rest_api/styles/colors.dart';
 import 'package:todo_provider_rest_api/utils/router.dart';
+import 'package:todo_provider_rest_api/utils/snack_message.dart';
 import 'package:todo_provider_rest_api/widgets/button.dart';
 import 'package:todo_provider_rest_api/widgets/text_field.dart';
-
-import 'providers/auth_provider/auth_provider.dart'; 
 //Login Page will contain 2 textfield w
 
 class LoginPage extends StatefulWidget {
@@ -62,33 +62,41 @@ class _LoginPageState extends State<LoginPage> {
                   //Button
                   Consumer<AuthenticationProvider>(
                     //stream: null,
+
+                    //builder accept a created object of the provider used
                     builder: (context, auth, child) {
+                      //To prevent the consumer form contanstly checking
+                      // WidgetsBinding.instance!.addPostFrameCallback((_) {
+                      //   if (auth.responseMessage == "") {
+                      //     showMessage(
+                      //         message: auth.responseMessage, context: context);
+                      //     auth.clear();
+                      //   }
+                      // });
                       return customButton(
                         text: 'Login',
                         tap: () {
-                          if(email.text.isEmpty || password.text.isEmpty){
-                            showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                title: Text('Error'),
-                                content: Text('Please enter all fields'),
-                                actions: [
-                                  FlatButton(
-                                    child: Text('Ok'),
-                                    onPressed: () => Navigator.pop(context),
-                                  )
-                                ],
-                              ),
+                          //Manual textfield validator
+                          if (_email.text.isEmpty || _password.text.isEmpty) {
+                            showMessage(
+                                message: 'Please fill all the fields',
+                                context: context);
+                          } else {
+                            auth.loginUser(
+                              email: _email.text.trim(),
+                              password: _password.text.trim(),
                             );
+                          }
                         },
                         context: context,
-                        status: false,
+                        status: auth.isLoading,
                       );
-                    }
+                    },
                   ),
                   GestureDetector(
                     onTap: () {
-                      PageNavigator(ctx: context).nextPage(RegisterPage());
+                      PageNavigator(ctx: context)
+                          .nextPage(const RegisterPage());
                     },
                     child: const Text('Register Instead'),
                   )
@@ -96,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           )
-        ], 
+        ],
       ),
     );
   }
