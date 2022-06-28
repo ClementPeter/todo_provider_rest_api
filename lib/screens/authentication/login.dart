@@ -41,69 +41,69 @@ class _LoginPageState extends State<LoginPage> {
         //list of slivers
         slivers: [
           //In order not contain other widgets we use sliver to box adapter
-          SliverToBoxAdapter(
-            child: Container(
-              // color: amber,
-              padding: const EdgeInsets.all(15),
-              child: Column(
-                children: [
-                  //username textfield
-                  customTextField(
-                    title: 'username',
-                    hint: 'Enter your username',
-                    controller: _email,
-                  ),
-                  //passwrod Textfield
-                  customTextField(
-                    title: 'password',
-                    hint: 'Enter your password',
-                    controller: _password,
-                  ),
-                  //Button
-                  Consumer<AuthenticationProvider>(
-                    //stream: null,
+          // SliverToBoxAdapter(
+          //   child: Container(
+          //     // color: amber,
+          //     padding: const EdgeInsets.all(15),
+          //     child: Column(
+          //       children: [
+          //         //username textfield
+          //         customTextField(
+          //           title: 'username',
+          //           hint: 'Enter your username',
+          //           controller: _email,
+          //         ),
+          //         //passwrod Textfield
+          //         customTextField(
+          //           title: 'password',
+          //           hint: 'Enter your password',
+          //           controller: _password,
+          //         ),
+          //         //Button
+          //         Consumer<AuthenticationProvider>(
+          //           //stream: null,
 
-                    //builder accept a created object of the provider used
-                    builder: (context, auth, child) {
-                      //To prevent the consumer form contanstly checking
-                      // WidgetsBinding.instance!.addPostFrameCallback((_) {
-                      //   if (auth.responseMessage == "") {
-                      //     showMessage(
-                      //         message: auth.responseMessage, context: context);
-                      //     auth.clear();
-                      //   }
-                      // });
-                      return customButton(
-                        text: 'Login',
-                        tap: () {
-                          //Manual textfield validator
-                          if (_email.text.isEmpty || _password.text.isEmpty) {
-                            showMessage(
-                                message: 'Please fill all the fields',
-                                context: context);
-                          } else {
-                            auth.loginUser(
-                              email: _email.text.trim(),
-                              password: _password.text.trim(),
-                            );
-                          }
-                        },
-                        context: context,
-                        status: auth.isLoading,
-                      );
-                    },
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      PageNavigator(ctx: context)
-                          .nextPage(const RegisterPage());
-                    },
-                    child: const Text('Register Instead'),
-                  )
-                ],
-              ),
-            ),
-          )
+          //           //builder accept a created object of the provider used
+          //           builder: (context, auth, child) {
+          //             //To prevent the consumer form contanstly checking
+          //             // WidgetsBinding.instance!.addPostFrameCallback((_) {
+          //             //   if (auth.responseMessage == "") {
+          //             //     showMessage(
+          //             //         message: auth.responseMessage, context: context);
+          //             //     auth.clear();
+          //             //   }
+          //             // });
+          //             return customButton(
+          //               text: 'Login',
+          //               tap: () {
+          //                 //Manual textfield validator
+          //                 if (_email.text.isEmpty || _password.text.isEmpty) {
+          //                   showMessage(
+          //                       message: 'Please fill all the fields',
+          //                       context: context);
+          //                 } else {
+          //                   auth.loginUser(
+          //                     email: _email.text.trim(),
+          //                     password: _password.text.trim(),
+          //                   );
+          //                 }
+          //               },
+          //               context: context,
+          //               status: auth.isLoading,
+          //             );
+          //           },
+          //         ),
+          //         GestureDetector(
+          //           onTap: () {
+          //             PageNavigator(ctx: context)
+          //                 .nextPage(const RegisterPage());
+          //           },
+          //           child: const Text('Register Instead'),
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
