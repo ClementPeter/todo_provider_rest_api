@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:todo_provider_rest_api/screens/authentication/login.dart';
 import 'package:todo_provider_rest_api/utils/router.dart';
 
+//Splash screen
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
-
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
+
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
@@ -27,13 +28,12 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  //The Splash Screen will navigate through this funtion after a Delay of 3 seconds to the Login Page
-
+  //Splash Screen will navigate through this funCtion after a delay of 3 seconds to the Login Page
   void navigate() {
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        PageNavigator(ctx: context).nextPageOnly( const LoginPage());
+        PageNavigator(ctx: context).nextPageOnly(const LoginPage());
       },
     );
   }
