@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-//Our App Color style is refrenced from here
+//Our App Color style is referenced from here
 
 Color primaryColor = const Color(0Xff742DDD);
 
