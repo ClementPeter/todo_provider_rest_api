@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
 
           //           //builder accept a created object of the provider used
           //           builder: (context, auth, child) {
-          //             //To prevent the consumer form contanstly checking
+          //             //To prevent the consumer form contanstly checking                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
           //             // WidgetsBinding.instance!.addPostFrameCallback((_) {
           //             //   if (auth.responseMessage == "") {
           //             //     showMessage(

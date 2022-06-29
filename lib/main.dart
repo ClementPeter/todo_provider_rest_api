@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         //
         ChangeNotifierProvider(create: (_) => AuthenticationProvider(),),
       ],
+      child:const  SplashScreen()
     );
   }
 }
