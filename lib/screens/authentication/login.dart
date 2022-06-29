@@ -49,13 +49,13 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   //username textfield
                   customTextField(
-                    title: 'username',
-                    hint: 'Enter your username',
+                    title: 'Email',
+                    hint: 'Enter your Email',
                     controller: _email,
                   ),
                   //passwrod Textfield
                   customTextField(
-                    title: 'password',
+                    title: 'Password',
                     hint: 'Enter your password',
                     controller: _password,
                   ),
@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                           //Manual textfield validator
                           if (_email.text.isEmpty || _password.text.isEmpty) {
                             showMessage(
-                                message: 'Please fill all the fields',
+                                message: 'Please fill all the fields for Login',
                                 context: context);
                           } else {
                             auth.loginUser(
@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                   GestureDetector(
                     onTap: () {
                       PageNavigator(ctx: context)
-                          .nextPage(const RegisterPage());
+                          .nextPage(page: const RegisterPage());
                     },
                     child: const Text('Register Instead'),
                   )
@@ -106,7 +106,6 @@ class _LoginPageState extends State<LoginPage> {
           )
         ],
       ),
-      
     );
   }
 }

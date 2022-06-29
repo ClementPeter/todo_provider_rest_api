@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        PageNavigator(ctx: context).nextPageOnly(const LoginPage());
+        PageNavigator(ctx: context).nextPageOnly(page: const LoginPage());
       },
     );
   }

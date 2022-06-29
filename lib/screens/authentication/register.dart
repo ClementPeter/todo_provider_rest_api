@@ -85,44 +85,54 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   //Button
                   Consumer<AuthenticationProvider>(
-                      builder: (context, auth, snapshot) {
-                    WidgetsBinding.instance!.addPostFrameCallback((_) {
-                      if (auth.responseMessage != "") {
-                        showMessage(
-                          message: auth.responseMessage.toUpperCase(),
-                          context: context,
-                        );
-                        auth.clear();
-                      }
-                    });
-                    return customButton(
-                      text: 'Register',
-                      tap: () {
-                        if (_firstName.text.isEmpty ||
-                            _firstName.text.isEmpty ||
-                            _email.text.isEmpty ||
-                            _password.text.isEmpty) {
+                    builder: (context, auth, snapshot) {
+                      WidgetsBinding.instance!.addPostFrameCallback((_) {
+                        if (auth.responseMessage != "") {
                           showMessage(
-                            message: 'Please fill in all the fields',
+                            message: auth.responseMessage.toUpperCase(),
                             context: context,
                           );
-                        } else {
-                          auth.registerUser(
-                            context: context,
-                            firstName: _firstName.text.trim(),
-                            lastName: _lastName.text.trim(),
-                            email: _email.text.trim(),
-                            password: _password.text.trim(),
-                          );
+                          auth.clear();
                         }
-                      },
-                      context: context,
-                      status: auth.isLoading,
-                    );
-                  }),
+                      });
+                      return customButton(
+                        text: 'Register',
+                        tap: () {
+                          if (_firstName.text.isEmpty ||
+                              _firstName.text.isEmpty ||
+                              _email.text.isEmpty ||
+                              _password.text.isEmpty) {
+                            showMessage(
+                              message:
+                                  'Please fill in all the fields to Register',
+                              context: context,
+                            );
+                          } else {
+                            auth.registerUser(
+                              context: context,
+                              firstName: _firstName.text.trim(),
+                              lastName: _lastName.text.trim(),
+                              email: _email.text.trim(),
+                              password: _password.text.trim(),
+                            );
+                          }
+                          // Navigator.pushReplacement(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const LoginPage(),
+                          //   ),
+                          // );
+                          PageNavigator().nextPage(page: const LoginPage());
+                        },
+                        context: context,
+                        status: auth.isLoading,
+                      );
+                    },
+                  ),
                   GestureDetector(
                     onTap: () {
-                      PageNavigator(ctx: context).nextPage(const LoginPage());
+                      PageNavigator(ctx: context)
+                          .nextPageOnly(page: const LoginPage());
                     },
                     child: const Text('Login Instead'),
                   )
