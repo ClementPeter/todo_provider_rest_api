@@ -9,7 +9,6 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
@@ -21,9 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: FlutterLogo(
-          size: 100
-        ),
+        child: FlutterLogo(size: 100),
       ),
     );
   }
@@ -31,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   //Splash Screen will navigate through this funCtion after a delay of 3 seconds to the Login Page
   void navigate() {
     Future.delayed(
-      const Duration(seconds: 3),
+      const Duration(seconds: 2),
       () {
         PageNavigator(ctx: context).nextPageOnly(const LoginPage());
       },

@@ -23,8 +23,8 @@ class AuthenticationProvider extends ChangeNotifier {
   bool _isLoading = false;
   String _responseMessage = " ";
 
-  //Function to perform  Registration for new users
-  // accepts various named parameters
+  //Function to perform Registration for new users
+  //accepts various named parameters
   void registerUser({
     required String firstName,
     required String lastName,
@@ -45,42 +45,50 @@ class AuthenticationProvider extends ChangeNotifier {
       'email': email,
       'password': password,
     };
-    print(body);
 
     //Making HTTP call to REGISTER a user... (POST) request inside TRY-CATCH BLOCK
-    //Create new usr is a POST request from the backend
+    //Register / create a new user is a POST request from the backend
     try {
+      //print(body);
       http.Response request =
           await http.post(Uri.parse(url), body: json.encode(body));
 
+      //print(request.statusCode);
+
       //HTTP checks for a success request
       if (request.statusCode == 200 || request.statusCode == 201) {
-        final response = json.decode(request.body);
-        print(response.body);
-        print("success");
+        // final response = json.decode(request.body);
+        // print(response);
 
+        _responseMessage = 'Account Created Successfully';
         _isLoading = false;
-        _responseMessage = 'Account Created';
         notifyListeners();
-        //print(req);
-
       } else {
         //if there is error--- get the body of response
-        final response = json.decode(request.body);
-        //fetching out the error message by plugging into the json
-        _responseMessage = response['massage'];
-        print(response.body);
-        print("404 _ not found");
+        print(request.statusCode);
+        print(request.body);
 
+        final response = json.decode(request.body);
+        print(response);
+
+        //fetching out the error message by plugging into the json
+        _responseMessage = 'Account already Exists';
+        // _responseMessage = response['message'];
+        //_responseMessage = 'The main guy no gree show';
         _isLoading = false;
         notifyListeners();
       }
     } on SocketException catch (_) {
+      //      print(request.statusCode);
+      // print(request.body);
       _isLoading = false;
-      _responseMessage = 'Internet not available';
+      _responseMessage = 'Internet connection is not available';
       notifyListeners();
     } catch (e) {
+      _isLoading = false;
+      _responseMessage = "Please try again`";
       print(':::: $e');
+      notifyListeners();
     }
   }
 
@@ -102,7 +110,7 @@ class AuthenticationProvider extends ChangeNotifier {
       'email': email,
       'password': password,
     };
-    print(body);
+    // print(body);
 
     //Making HTTP call to LOGIN a user... (POST) request inside TRY-CATCH BLOCK
     //Create new usr is a POST request from the backend
@@ -114,27 +122,31 @@ class AuthenticationProvider extends ChangeNotifier {
       if (request.statusCode == 200 || request.statusCode == 201) {
         final response = json.decode(request.body);
         print(response.body);
-        print("success");
 
-        _isLoading = false;
         _responseMessage = 'Account Logged In';
+        _isLoading = false;
         notifyListeners();
-        //print(req);
-
       } else {
-        final response = json.decode(request.body);
-        print(response.body);
-        print("404 _ not found");
+        // print(statuscode)
+        print(request.statusCode);
+        print(request.body);
 
+        //if there is error--- get the body of response
+        final response = json.decode(request.body);
+        _responseMessage = response['message'];
         _isLoading = false;
         notifyListeners();
       }
     } on SocketException catch (_) {
+      _responseMessage = 'Internet Issues';
+
       _isLoading = false;
-      _responseMessage = 'Internet not available';
       notifyListeners();
     } catch (e) {
+      _isLoading = false;
+      _responseMessage = "Please try again";
       print(':::: $e');
+      notifyListeners();
     }
   }
 

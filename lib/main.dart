@@ -20,7 +20,19 @@ class MyApp extends StatelessWidget {
         //
         ChangeNotifierProvider(create: (_) => AuthenticationProvider(),),
       ],
-      child:const  SplashScreen()
+      //
+      child: MaterialApp(
+        //title: 'Todo Provider Rest API',
+        theme: ThemeData(
+          //TextSelectionThemeData.cursorColor(red),
+          appBarTheme: AppBarTheme(
+            color: primaryColor            
+          ),
+          //primarySwatch: primaryColor,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: const SplashScreen(),
+      ),
     );
   }
 }

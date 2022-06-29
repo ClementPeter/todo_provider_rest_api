@@ -3,7 +3,7 @@ import 'package:todo_provider_rest_api/styles/colors.dart';
 
 //Custom Button for login and register with named parameters that returns a Gesture Detector
 //tap : Navigate to next page
-//status : checks the status of button -- status reacts based on the isLoading Value
+//status : checks the status of button -- status reacts based on the isLoading Value 
 Widget customButton({
   VoidCallback? tap,
   bool status = false,
