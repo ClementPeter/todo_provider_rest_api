@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:todo_provider_rest_api/constants/constants.dart';
+import 'package:todo_provider_rest_api/providers/auth_provider/database/database_provider.dart';
 import 'package:todo_provider_rest_api/screens/authentication/login.dart';
 import 'package:todo_provider_rest_api/utils/router.dart';
 /*Provider folder stores the providers variables and functions that chages overtime
@@ -24,6 +25,9 @@ class AuthenticationProvider extends ChangeNotifier {
   //Setters
   bool _isLoading = false;
   String _responseMessage = " ";
+
+  //create new databaseprovider object/insance
+  final DatabaseProvider databaseProvider = DatabaseProvider();
 
   //Function to perform Registration for new users
   //accepts various named parameters
@@ -117,11 +121,39 @@ class AuthenticationProvider extends ChangeNotifier {
       //HTTP checks for a success request
       if (request.statusCode == 200 || request.statusCode == 201) {
         final response = json.decode(request.body);
-        print(response);
-        // _responseMessage = 'Login Successful';
+        // print(response);
 
         _responseMessage = 'Account Logged In';
         _isLoading = false;
+
+        // Future.delayed(duration: const Duration(milliseconds: 500), () {
+        //     databaseProvider.saveToken(response['token']);
+
+        // });
+        const Duration(seconds: 5000);
+
+        //storing the token and userId in the local storage
+        databaseProvider.saveToken(response['token']);
+        // databaseProvider.saveUserId(response['userId']);
+
+        // databaseProvider.setItem('user', json.encode(response['user']));
+        // databaseProvider.``
+        // localStorage.setItem('userName', response['user']['name']);
+        // localStorage.setItem('userEmail', response['user']['email']);
+        // localStorage.setItem('userRole', response['user']['role']);
+        // localStorage.setItem('userImage', response['user']['image']);
+        // localStorage.setItem('userCreatedAt', response['user']['createdAt']);
+        // localStorage.setItem('userUpdatedAt', response['user']['updatedAt']);
+        // localStorage.setItem('userDeletedAt', response['user']['deletedAt']);
+        // localStorage.setItem('userIsAdmin', response['user']['isAdmin']);
+        // localStorage.setItem('userIsActive', response['user']['isActive']);
+        // localStorage.setItem('userIsDeleted', response['user']['isDeleted']);
+        // localStorage.setItem('userIsVerified', response['user']['isVerified']);
+        // localStorage.setItem('userIsVerifiedByAdmin', response['user']['isVerifiedByAdmin']);
+        // localStorage.setItem('userIsVerifiedByUser', response['user']['isVerifiedByUser']);
+        // localStorage.setItem('userIsVerifiedByUser', response['user']['isVerifiedByUser']);
+        // localStorage.setItem('userIsVerifiedByUser', response['user']['isVerifiedByUser']);
+
         notifyListeners();
       } else {
         print(request.statusCode);
@@ -141,7 +173,7 @@ class AuthenticationProvider extends ChangeNotifier {
     } catch (e) {
       _isLoading = false;
       _responseMessage = "Please try again";
-      print(':::: $e');
+      print('::::$e');
       notifyListeners();
     }
   }

@@ -21,6 +21,7 @@ class DatabaseProvider extends ChangeNotifier {
     SharedPreferences value = await _preference;
     //saves a user token value to the 'token' key
     value.setString('token', token);
+    print("Token saved $token");
   }
 
   //function to save user id
@@ -28,9 +29,10 @@ class DatabaseProvider extends ChangeNotifier {
     SharedPreferences value = await _preference;
     //saves a user id value to the 'id' key
     value.setString('id', id);
+    print("Used id saved $id");
   }
 
-  //Funtion to get the token and id out of shared preference after it has been saved
+  //Funtion to get the token out of shared preference after it has been saved
 
   Future<String> getToken() async {
     SharedPreferences value = await _preference;
@@ -49,7 +51,9 @@ class DatabaseProvider extends ChangeNotifier {
     }
   }
 
-  // getUserId
+  //Funtion to get the UserId out of shared preference after it has been saved
+
+  
   Future<String> getUserId() async {
     SharedPreferences value = await _preference;
 
