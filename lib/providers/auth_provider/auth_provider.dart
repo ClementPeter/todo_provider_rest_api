@@ -8,8 +8,8 @@ import 'package:todo_provider_rest_api/utils/router.dart';
 /*Provider folder stores the providers variables and functions that chages overtime
 Providers that communicate witth the app
 */
-
-//Login / Authentication login using Auth Provider class  hold the to create a new user and login funtionalities
+//Provider for user authentication
+//Login / Authentication  using Auth Provider class; Holds the to create a new user and login funtionalities
 
 //ChangeNotifier enables us to use notifyListerners--
 //This AuthProvider class is a clss we will use as a provider in our main.dar to listen to registration and login events
