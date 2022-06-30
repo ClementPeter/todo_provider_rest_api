@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_provider_rest_api/providers/auth_provider/auth_provider.dart';
 import 'package:todo_provider_rest_api/screens/authentication/login.dart';
-
 import 'package:todo_provider_rest_api/utils/router.dart';
 import 'package:todo_provider_rest_api/utils/snack_message.dart';
 import 'package:todo_provider_rest_api/widgets/button.dart';
@@ -31,16 +30,11 @@ class _RegisterPageState extends State<RegisterPage> {
   void dispose() {
     // TODO: implement dispose
 
-    // _firstName.clear();
-    // _lastName.clear();
-    // _email.clear();
-    // _password.clear();
-
-    // _email.dispose();
-    // _password.dispose();
-    // _firstName.dispose();
-    // _lastName.dispose();
-
+    _email.dispose();
+    _password.dispose();
+    _firstName.dispose();
+    _lastName.dispose();
+    //print('Register Page disposed');
     super.dispose();
   }
 
@@ -92,6 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             message: auth.responseMessage.toUpperCase(),
                             context: context,
                           );
+                          //Clears the message after displaying it
                           auth.clear();
                         }
                       });
@@ -116,13 +111,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               password: _password.text.trim(),
                             );
                           }
-                          // Navigator.pushReplacement(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => const LoginPage(),
-                          //   ),
-                          // );
-                          PageNavigator().nextPage(page: const LoginPage());
                         },
                         context: context,
                         status: auth.isLoading,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:todo_provider_rest_api/screens/authentication/login.dart';
 
 //Utils folders are used to store  functions that are used in multiple places.
 

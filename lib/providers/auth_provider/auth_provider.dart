@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:todo_provider_rest_api/constants/constants.dart';
+import 'package:todo_provider_rest_api/screens/authentication/login.dart';
+import 'package:todo_provider_rest_api/utils/router.dart';
 /*Provider folder stores the providers variables and functions that chages overtime
 Providers that communicate witth the app
 */
@@ -53,33 +55,28 @@ class AuthenticationProvider extends ChangeNotifier {
       http.Response request =
           await http.post(Uri.parse(url), body: json.encode(body));
 
-      //print(request.statusCode);
-
       //HTTP checks for a success request
       if (request.statusCode == 200 || request.statusCode == 201) {
-        // final response = json.decode(request.body);
-        // print(response);
-
-        _responseMessage = 'Account Created Successfully';
+        // print(request.statusCode);
         _isLoading = false;
+        _responseMessage = 'Account Created Successfully';
+
+        PageNavigator(ctx: context).nextPage(page: const LoginPage());
         notifyListeners();
       } else {
         //if there is error--- get the body of response
-        print(request.statusCode);
-        print(request.body);
-
-        final response = json.decode(request.body);
-        print(response);
+        // print(request.statusCode);
+        // final response = json.decode(request.body);
+        // print(response['message']);
 
         //fetching out the error message by plugging into the json
         _responseMessage = 'Account already Exists';
-        // _responseMessage = response['message'];
-        //_responseMessage = 'The main guy no gree show';
         _isLoading = false;
         notifyListeners();
       }
     } on SocketException catch (_) {
-      //      print(request.statusCode);
+      // print('Socket Exception');
+      // print(request.statusCode);
       // print(request.body);
       _isLoading = false;
       _responseMessage = 'Internet connection is not available';
@@ -93,7 +90,7 @@ class AuthenticationProvider extends ChangeNotifier {
   }
 
   //Login user
-  //Function to perform  Registration for new users
+  //Function to perform Registration for new users
   // accepts various named parameters
   void loginUser({
     required String email,
@@ -110,7 +107,6 @@ class AuthenticationProvider extends ChangeNotifier {
       'email': email,
       'password': password,
     };
-    // print(body);
 
     //Making HTTP call to LOGIN a user... (POST) request inside TRY-CATCH BLOCK
     //Create new usr is a POST request from the backend
@@ -120,20 +116,20 @@ class AuthenticationProvider extends ChangeNotifier {
 
       //HTTP checks for a success request
       if (request.statusCode == 200 || request.statusCode == 201) {
-        final response = json.decode(request.body);
-        print(response.body);
+        // final response = json.decode(request.body);
+        // print(response['message']);
+       // _responseMessage = 'Login Successful';
 
         _responseMessage = 'Account Logged In';
         _isLoading = false;
         notifyListeners();
       } else {
-        // print(statuscode)
         print(request.statusCode);
         print(request.body);
 
         //if there is error--- get the body of response
-        final response = json.decode(request.body);
-        _responseMessage = response['message'];
+        // final response = json.decode(request.body);
+        // _responseMessage = response['message'];
         _isLoading = false;
         notifyListeners();
       }

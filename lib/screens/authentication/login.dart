@@ -28,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     // TODO: implement dispose
     _email.dispose();
     _password.dispose();
+    // print('login page disposed');
     super.dispose();
   }
 
@@ -47,13 +48,13 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.all(15),
               child: Column(
                 children: [
-                  //username textfield
+                  //email textfield
                   customTextField(
                     title: 'Email',
                     hint: 'Enter your Email',
                     controller: _email,
                   ),
-                  //passwrod Textfield
+                  //password Textfield
                   customTextField(
                     title: 'Password',
                     hint: 'Enter your password',
