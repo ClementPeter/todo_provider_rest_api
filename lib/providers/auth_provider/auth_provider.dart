@@ -116,9 +116,9 @@ class AuthenticationProvider extends ChangeNotifier {
 
       //HTTP checks for a success request
       if (request.statusCode == 200 || request.statusCode == 201) {
-        // final response = json.decode(request.body);
-        // print(response['message']);
-       // _responseMessage = 'Login Successful';
+        final response = json.decode(request.body);
+        print(response);
+        // _responseMessage = 'Login Successful';
 
         _responseMessage = 'Account Logged In';
         _isLoading = false;
