@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:todo_provider_rest_api/providers/auth_provider/auth_provider.dart';
-// import 'package:todo_provider_rest_api/providers/auth_provider/database/database_provider.dart';
-// import 'package:todo_provider_rest_api/splash.dart';
-// import 'package:todo_provider_rest_api/styles/colors.dart';
+import 'package:todo_provider_rest_api/providers/auth_provider/auth_provider.dart';
+import 'package:todo_provider_rest_api/providers/auth_provider/database/database_provider.dart';
+import 'package:todo_provider_rest_api/splash.dart';
+import 'package:todo_provider_rest_api/styles/colors.dart';
 
 void main() {
   runApp(const MyApp());
