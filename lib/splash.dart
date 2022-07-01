@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:todo_provider_rest_api/providers/database/database_provider.dart';
 import 'package:todo_provider_rest_api/screens/authentication/login.dart';
+import 'package:todo_provider_rest_api/screens/task_page/home_page.dart';
 import 'package:todo_provider_rest_api/utils/router.dart';
 
 //Splash screen
@@ -10,6 +12,9 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  //databaseprovider instance
+  DatabaseProvider databaseProvider = DatabaseProvider();
+
   @override
   void initState() {
     super.initState();
@@ -30,7 +35,17 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        PageNavigator(ctx: context).nextPageOnly(page: const LoginPage());
+        // navigate to HomePage
+        //based on whether user has loggednin before redirect user to homepage
+        databaseProvider.getToken().then((value) {
+          if (value == '') {
+            PageNavigator(ctx: context).nextPageOnly(page: const LoginPage());
+          } else {
+            PageNavigator(ctx: context).nextPageOnly(page: const HomePage());
+          }
+        },);
+
+        //PageNavigator(ctx: context).nextPageOnly(page: const LoginPage());
       },
     );
   }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_provider_rest_api/providers/auth_provider/auth_provider.dart';
-import 'package:todo_provider_rest_api/providers/auth_provider/database/database_provider.dart';
+//import 'package:todo_provider_rest_api/providers/auth_provider/database/database_provider.dart';
+import 'package:todo_provider_rest_api/providers/database/database_provider.dart';
 import 'package:todo_provider_rest_api/splash.dart';
 import 'package:todo_provider_rest_api/styles/colors.dart';
 
@@ -18,9 +19,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         //provider for user authentication
-        ChangeNotifierProvider(
-          create: (_) => AuthenticationProvider(),
-        ),
+        ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
         //Provider for storing  user details in shared preferance
         ChangeNotifierProvider(create: (_) => DatabaseProvider()),
       ],
@@ -30,6 +29,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           //TextSelectionThemeData.cursorColor(red),
           appBarTheme: AppBarTheme(color: primaryColor),
+          floatingActionButtonTheme:
+              FloatingActionButtonThemeData(backgroundColor: primaryColor),
           //primarySwatch: primaryColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),

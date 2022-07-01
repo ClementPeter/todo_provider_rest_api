@@ -17,7 +17,7 @@ class PageNavigator {
         ctx!, CupertinoPageRoute(builder: (context) => page!));
   }
 
-  //Navigate to the next page and removee the previous from the stack
+  //Navigate to the next page and remove the previous from the stack
   void nextPageOnly({Widget? page}) {
     Navigator.pushAndRemoveUntil(
         ctx!, MaterialPageRoute(builder: (context) => page!), (route) => false);

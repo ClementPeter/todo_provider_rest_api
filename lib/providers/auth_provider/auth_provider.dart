@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:todo_provider_rest_api/constants/constants.dart';
-import 'package:todo_provider_rest_api/providers/auth_provider/database/database_provider.dart';
+import 'package:todo_provider_rest_api/providers/database/database_provider.dart';
+//import 'package:todo_provider_rest_api/providers/auth_provider/database/database_provider.dart';
 import 'package:todo_provider_rest_api/screens/authentication/login.dart';
+import 'package:todo_provider_rest_api/screens/task_page/home_page.dart';
 import 'package:todo_provider_rest_api/utils/router.dart';
 /*Provider folder stores the providers variables and functions that chages overtime
 Providers that communicate witth the app
@@ -26,11 +28,10 @@ class AuthenticationProvider extends ChangeNotifier {
   bool _isLoading = false;
   String _responseMessage = " ";
 
-  //create new databaseprovider object/insance
+  //create new databaseProvider object/insance
   final DatabaseProvider databaseProvider = DatabaseProvider();
 
-  //Function to perform Registration for new users
-  //accepts various named parameters
+  //Function to perform Registration for new users and accepts various named parameters
   void registerUser({
     required String firstName,
     required String lastName,
@@ -120,20 +121,42 @@ class AuthenticationProvider extends ChangeNotifier {
 
       //HTTP checks for a success request
       if (request.statusCode == 200 || request.statusCode == 201) {
+        //print(request.body);
         final response = json.decode(request.body);
-        // print(response);
+        print(response);
 
         _responseMessage = 'Account Logged In';
         _isLoading = false;
+
+        //Save user data and navigate to homepage
+        //final userId = response['user']['id'];
+        //final token = response['authToken'];
+
+        //save user data to the shared preference database
+        //databaseProvider.saveToken(token);
+        //databaseProvider.saveUserId(userId);
+
+        PageNavigator(ctx: context).nextPageOnly(page: const HomePage());
+
+        // databaseProvider.saveUser(
+        //   user: User(
+        //     id: response['id'],
+        //     firstName: response['firstName'],
+        //     lastName: response['lastName'],
+        //     email: response['email'],
+        //   ),
+        // );
+        //PageNavigator(ctx: context).nextPage(page: const HomePage());
+        // notifyListeners();
 
         // Future.delayed(duration: const Duration(milliseconds: 500), () {
         //     databaseProvider.saveToken(response['token']);
 
         // });
-        const Duration(seconds: 5000);
+        //const Duration(seconds: 5000);
 
         //storing the token and userId in the local storage
-        databaseProvider.saveToken(response['token']);
+        // databaseProvider.saveToken(response['token']);
         // databaseProvider.saveUserId(response['userId']);
 
         // databaseProvider.setItem('user', json.encode(response['user']));
@@ -156,8 +179,8 @@ class AuthenticationProvider extends ChangeNotifier {
 
         notifyListeners();
       } else {
-        print(request.statusCode);
-        print(request.body);
+        // print(request.statusCode);
+        //print(request.body);
 
         //if there is error--- get the body of response
         // final response = json.decode(request.body);
@@ -167,7 +190,6 @@ class AuthenticationProvider extends ChangeNotifier {
       }
     } on SocketException catch (_) {
       _responseMessage = 'Internet Issues';
-
       _isLoading = false;
       notifyListeners();
     } catch (e) {

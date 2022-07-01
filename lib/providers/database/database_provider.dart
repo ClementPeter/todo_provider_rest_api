@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_provider_rest_api/screens/authentication/login.dart';
+import 'package:todo_provider_rest_api/utils/router.dart';
 
 //Using shared preferences to store the user data
 //Provider for storing  user details in shared preferance
@@ -53,7 +55,6 @@ class DatabaseProvider extends ChangeNotifier {
 
   //Funtion to get the UserId out of shared preference after it has been saved
 
-  
   Future<String> getUserId() async {
     SharedPreferences value = await _preference;
 
@@ -69,5 +70,12 @@ class DatabaseProvider extends ChangeNotifier {
       notifyListeners();
       return '';
     }
+  }
+
+  //function to clear the token and user id from the local storage
+  void logOut(BuildContext context) async {
+    final value = await _preference;
+    value.clear();
+    PageNavigator(ctx: context).nextPageOnly(page: const LoginPage());
   }
 }
