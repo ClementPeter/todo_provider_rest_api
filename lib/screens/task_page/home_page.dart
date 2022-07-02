@@ -73,6 +73,7 @@ class _HomePageState extends State<HomePage> {
         mini: true,
         child: const Icon(Icons.add),
         onPressed: () {
+          PageNavigator(ctx: context).nextPageOnly(page:)
           // Navigator.pushNamed(context, '/add-task');
         },
       ),
