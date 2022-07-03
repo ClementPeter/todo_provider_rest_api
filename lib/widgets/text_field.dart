@@ -3,7 +3,7 @@ import 'package:todo_provider_rest_api/styles/colors.dart';
 
 //Custom Built TextField
 // Null Safety Tips - ? after the datatype indicates the varialble can accept null
-//_                   !  after the variable name indicates that variable is a nullable one
+//_                   !  after the variable name indicates that variable is a nullable one and can accept null or could be potentialy null
 //Custom Textfield tha buld a textfield with essential features
 Widget customTextField({
   String? title,
@@ -22,8 +22,7 @@ Widget customTextField({
         ),
       ),
       //TextField Section
-      Container(
-      
+      Container(      
         alignment: Alignment.centerLeft,
         margin: const EdgeInsets.symmetric(vertical: 10),
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),

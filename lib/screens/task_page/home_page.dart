@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_provider_rest_api/providers/auth_provider/auth_provider.dart';
 import 'package:todo_provider_rest_api/providers/database/database_provider.dart';
+import 'package:todo_provider_rest_api/screens/task_page/add_task_page.dart';
 import 'package:todo_provider_rest_api/screens/task_page/task_field_container.dart';
 import 'package:todo_provider_rest_api/styles/colors.dart';
 import 'package:todo_provider_rest_api/utils/router.dart';
@@ -73,7 +74,7 @@ class _HomePageState extends State<HomePage> {
         mini: true,
         child: const Icon(Icons.add),
         onPressed: () {
-          PageNavigator(ctx: context).nextPageOnly(page:)
+          PageNavigator(ctx: context).nextPageOnly(page:const AddTaskPage());
           // Navigator.pushNamed(context, '/add-task');
         },
       ),

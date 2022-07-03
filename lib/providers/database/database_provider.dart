@@ -4,7 +4,7 @@ import 'package:todo_provider_rest_api/screens/authentication/login.dart';
 import 'package:todo_provider_rest_api/utils/router.dart';
 
 //Using shared preferences to store the user data
-//Provider for storing  user details in shared preferance
+//Provider for storing  user details in shared preferance fro reference purposes and usage in other screens
 
 class DatabaseProvider extends ChangeNotifier {
   //initialize the shared preference --returns a Future
@@ -15,7 +15,7 @@ class DatabaseProvider extends ChangeNotifier {
   String get userId => _userId;
 
   //setters --private
-  String _token = " ";
+  String _token = " ";   
   String _userId = " ";
 
   //funtion to save token
@@ -72,7 +72,7 @@ class DatabaseProvider extends ChangeNotifier {
     }
   }
 
-  //function to clear the token and user id from the local storage
+  //Function to clear the token and user id from the local storage
   void logOut(BuildContext context) async {
     final value = await _preference;
     value.clear();

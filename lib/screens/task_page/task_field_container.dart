@@ -3,6 +3,7 @@ import 'package:todo_provider_rest_api/styles/colors.dart';
 
 //Custom widget that builds a ListTile as a To-Do Item
 
+// ignore: must_be_immutable
 class TaskField extends StatefulWidget {
   TaskField(
       {Key? key,
@@ -57,8 +58,7 @@ class _TaskFieldState extends State<TaskField> {
               : TextDecoration.none,
         ),
       ),
-      trailing: Checkbox(   
-
+      trailing: Checkbox(
         value: widget.isCompleted,
         onChanged: (value) {
           setState(() {

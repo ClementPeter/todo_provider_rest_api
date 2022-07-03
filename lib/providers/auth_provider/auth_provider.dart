@@ -12,7 +12,8 @@ import 'package:todo_provider_rest_api/utils/router.dart';
 Providers that communicate witth the app
 */
 //Provider for user authentication
-//Login / Authentication  using Auth Provider class; Holds the to create a new user and login funtionalities
+//Login / Authentication  using AuthProvider class; Holds the funtions to create a new user and login
+//funtionalities and also notifies the app when the user is logged in or logged out 
 
 //ChangeNotifier enables us to use notifyListerners--
 //This AuthProvider class is a clss we will use as a provider in our main.dar to listen to registration and login events
