@@ -6,6 +6,22 @@ This flutter project is a To-Do Application that has Authentication functionalit
 API Source: https://wisdommatt-todolist-api.herokuapp.com
 
 ### Resources Integrated:
+
+Create new user
+POST: /users/
+
+Login User
+POST: /users/login
+
+Create Task
+POST: /tasks/
+
+Get Task
+GET: /tasks/{taskId}
+
+Delete Task
+DELETE: /tasks/{taskId}
+
 /posts  :  https://jsonplaceholder.typicode.com/posts
 
 /album  :  https://jsonplaceholder.typicode.com/albums
