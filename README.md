@@ -1,6 +1,32 @@
 # todo_provider_rest_api
 
-A new Flutter project.
+## About
+This flutter project is a To-Do Application that has Authentication functionality and saves  to Integrate API resources from JSON Place Holder API
+
+API Source: https://wisdommatt-todolist-api.herokuapp.com
+
+### Resources Integrated:
+/posts  :  https://jsonplaceholder.typicode.com/posts
+
+/album  :  https://jsonplaceholder.typicode.com/albums
+
+/users  : https://jsonplaceholder.typicode.com/users
+
+### Features Implemented
+> Login and Register funtionality suing custom MongoDb Backend
+
+> API Consumption : HTTP GET,POST, Request
+
+> Simple Layout : Scrollable,
+
+> State Management : Provider
+
+> Local Storage : SharedPreference-- For storing user token and Id from backend
+
+
+Tutorial Playlist : https://www.youtube.com/playlist?list=PLpTC1FqgUpLRhzinu-4tSW4eMkxzwOEcx
+
+
 
 ## Getting Started
 
