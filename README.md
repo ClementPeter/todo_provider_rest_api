@@ -19,13 +19,16 @@ API Source: https://wisdommatt-todolist-api.herokuapp.com
 
 > Simple Layout : Scrollable,
 
-> State Management : Provider
+> State Management : Provider -- For Notifying changes in class funtionality to other part of the App
 
 > Local Storage : SharedPreference-- For storing user token and Id from backend
 
+> CRUD Operation :  Add Task, Delete Task, Update Task,
+
+
 
 Tutorial Playlist : https://www.youtube.com/playlist?list=PLpTC1FqgUpLRhzinu-4tSW4eMkxzwOEcx
-
+Custom Bakend Repo : https://github.com/wisdommatt/todo-list-api
 
 
 ## Getting Started
