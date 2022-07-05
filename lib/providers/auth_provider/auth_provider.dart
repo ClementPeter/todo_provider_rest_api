@@ -6,6 +6,7 @@ import 'package:todo_provider_rest_api/constants/constants.dart';
 import 'package:todo_provider_rest_api/providers/database/database_provider.dart';
 //import 'package:todo_provider_rest_api/providers/auth_provider/database/database_provider.dart';
 import 'package:todo_provider_rest_api/screens/authentication/login.dart';
+import 'package:todo_provider_rest_api/screens/task_page/add_task_page.dart';
 import 'package:todo_provider_rest_api/screens/task_page/home_page.dart';
 import 'package:todo_provider_rest_api/utils/router.dart';
 /*Provider folder stores the providers variables and functions that chages overtime
@@ -13,13 +14,13 @@ Providers that communicate witth the app
 */
 //Provider for user authentication
 //Login / Authentication  using AuthProvider class; Holds the funtions to create a new user and login
-//funtionalities and also notifies the app when the user is logged in or logged out 
+//funtionalities and also notifies the app when the user is logged in or logged out
 
 //ChangeNotifier enables us to use notifyListerners--
 //This AuthProvider class is a clss we will use as a provider in our main.dar to listen to registration and login events
 class AuthenticationProvider extends ChangeNotifier {
-  //
-  final requestBaseUrl = AppUrl.baseUrl;
+  //Web Url prefix
+  final baseUrl = AppUrl.baseUrl;
 
   //Getters-- Allows the class to call them
   bool get isLoading => _isLoading;
@@ -44,7 +45,7 @@ class AuthenticationProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    String url = "$requestBaseUrl/users/";
+    String url = "$baseUrl/users/";
 
     //body ---A map that is going to be passed to the POST request as "body"
     final body = {
@@ -67,7 +68,7 @@ class AuthenticationProvider extends ChangeNotifier {
         _isLoading = false;
         _responseMessage = 'Account Created Successfully';
 
-        PageNavigator(ctx: context).nextPage(page: const LoginPage());
+        // PageNavigator(ctx: context).nextPage(page: const LoginPage());
         notifyListeners();
       } else {
         //if there is error--- get the body of response
@@ -96,8 +97,7 @@ class AuthenticationProvider extends ChangeNotifier {
   }
 
   //Login user
-  //Function to perform Registration for new users
-  // accepts various named parameters
+  //Function to perform Registration for new users, accepts various named parameters
   void loginUser({
     required String email,
     required String password,
@@ -106,19 +106,17 @@ class AuthenticationProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    String url = "$requestBaseUrl/users/login";
+    String url = "$baseUrl/users/login";
 
-    //body ---A map that is going to be passed to the POST request as "body"
-    final body = {
-      'email': email,
-      'password': password,
-    };
+    //body --- A map that is going to be passed to the POST request as "body"
+    final body = {'email': email, 'password': password};
 
     //Making HTTP call to LOGIN a user... (POST) request inside TRY-CATCH BLOCK
     //Create new usr is a POST request from the backend
     try {
       http.Response request =
           await http.post(Uri.parse(url), body: json.encode(body));
+      // print(url);
 
       //HTTP checks for a success request
       if (request.statusCode == 200 || request.statusCode == 201) {
@@ -128,72 +126,53 @@ class AuthenticationProvider extends ChangeNotifier {
 
         _responseMessage = 'Account Logged In';
         _isLoading = false;
+        //_isLoading = false;
+        //_resMessage = "Login successfull!";
+        notifyListeners();
+
+        ///Save users data and then navigate to homepage
+        final userId = response['user']['id'];
+        final token = response['authToken'];
+        DatabaseProvider().saveToken(token);
+        DatabaseProvider().saveUserId(userId);
+        //Navigator.push(            context!, MaterialPageRoute(builder: (context) => HomePage()));
+
+        //Navigator.push(context:BuildContext, MaterialPageRoute())
+        // PageNavigator(ctx: context).nextPageOnly(page: const HomePage());
 
         //Save user data and navigate to homepage
-        //final userId = response['user']['id'];
-        //final token = response['authToken'];
+        // final userId = response['user']['id'];
+        // final token = response['authToken'];
+        // print(userId);
+        // print(token);
 
         //save user data to the shared preference database
         //databaseProvider.saveToken(token);
         //databaseProvider.saveUserId(userId);
 
-        PageNavigator(ctx: context).nextPageOnly(page: const HomePage());
+        //PageNavigator(ctx: context).nextPageOnly(page: const HomePage());
+        PageNavigator(ctx: context!).nextPage(page: const AddTaskPage());
+        //print('Navigated to a home/ add pasge');
 
-        // databaseProvider.saveUser(
-        //   user: User(
-        //     id: response['id'],
-        //     firstName: response['firstName'],
-        //     lastName: response['lastName'],
-        //     email: response['email'],
-        //   ),
-        // );
-        //PageNavigator(ctx: context).nextPage(page: const HomePage());
-        // notifyListeners();
-
-        // Future.delayed(duration: const Duration(milliseconds: 500), () {
-        //     databaseProvider.saveToken(response['token']);
-
-        // });
-        //const Duration(seconds: 5000);
-
-        //storing the token and userId in the local storage
-        // databaseProvider.saveToken(response['token']);
-        // databaseProvider.saveUserId(response['userId']);
-
-        // databaseProvider.setItem('user', json.encode(response['user']));
-        // databaseProvider.``
-        // localStorage.setItem('userName', response['user']['name']);
-        // localStorage.setItem('userEmail', response['user']['email']);
-        // localStorage.setItem('userRole', response['user']['role']);
-        // localStorage.setItem('userImage', response['user']['image']);
-        // localStorage.setItem('userCreatedAt', response['user']['createdAt']);
-        // localStorage.setItem('userUpdatedAt', response['user']['updatedAt']);
-        // localStorage.setItem('userDeletedAt', response['user']['deletedAt']);
-        // localStorage.setItem('userIsAdmin', response['user']['isAdmin']);
-        // localStorage.setItem('userIsActive', response['user']['isActive']);
-        // localStorage.setItem('userIsDeleted', response['user']['isDeleted']);
-        // localStorage.setItem('userIsVerified', response['user']['isVerified']);
-        // localStorage.setItem('userIsVerifiedByAdmin', response['user']['isVerifiedByAdmin']);
-        // localStorage.setItem('userIsVerifiedByUser', response['user']['isVerifiedByUser']);
-        // localStorage.setItem('userIsVerifiedByUser', response['user']['isVerifiedByUser']);
-        // localStorage.setItem('userIsVerifiedByUser', response['user']['isVerifiedByUser']);
-
-        notifyListeners();
+        //notifyListeners();
       } else {
-        // print(request.statusCode);
+        print("${request.statusCode} from else command");
         //print(request.body);
 
         //if there is error--- get the body of response
-        // final response = json.decode(request.body);
-        // _responseMessage = response['message'];
+        final response = json.decode(request.body);
+
+        _responseMessage = response['message'];
         _isLoading = false;
         notifyListeners();
       }
     } on SocketException catch (_) {
-      _responseMessage = 'Internet Issues';
+      _responseMessage = 'Lost Internet Connection';
       _isLoading = false;
       notifyListeners();
     } catch (e) {
+      print('UNKNOWN ERROR ::::$e');
+
       _isLoading = false;
       _responseMessage = "Please try again";
       print('::::$e');
@@ -203,7 +182,7 @@ class AuthenticationProvider extends ChangeNotifier {
 
   //function to clear the response message
   void clear() {
-    _responseMessage = "";
+    _responseMessage = " ";
     //_isLoading = false;
     notifyListeners();
   }

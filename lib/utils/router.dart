@@ -7,19 +7,19 @@ import 'package:flutter/cupertino.dart';
 
 class PageNavigator {
   //PageNavigator variable and  Constructor
-  BuildContext? ctx;
+  BuildContext ctx;
 
-  PageNavigator({this.ctx});
+  PageNavigator({required this.ctx});
 
   //Navigate to next page using Cupertino page Route
   Future nextPage({Widget? page}) {
     return Navigator.push(
-        ctx!, CupertinoPageRoute(builder: (context) => page!));
+        ctx, CupertinoPageRoute(builder: ((context) => page!)));
   }
 
   //Navigate to the next page and remove the previous from the stack
   void nextPageOnly({Widget? page}) {
     Navigator.pushAndRemoveUntil(
-        ctx!, MaterialPageRoute(builder: (context) => page!), (route) => false);
+        ctx, MaterialPageRoute(builder: (context) => page!), (route) => false);
   }
 }

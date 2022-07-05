@@ -15,7 +15,7 @@ class DatabaseProvider extends ChangeNotifier {
   String get userId => _userId;
 
   //setters --private
-  String _token = " ";   
+  String _token = " ";
   String _userId = " ";
 
   //funtion to save token
@@ -47,9 +47,9 @@ class DatabaseProvider extends ChangeNotifier {
       notifyListeners();
       return data;
     } else {
-      _token = '';
+      _token = " ";
       notifyListeners();
-      return '';
+      return " ";
     }
   }
 
@@ -66,16 +66,19 @@ class DatabaseProvider extends ChangeNotifier {
       return data;
     } else {
       _userId:
-      '';
+      " ";
       notifyListeners();
-      return '';
+      return _userId;
     }
   }
 
-  //Function to clear the token and user id from the local storage
+  //Function to clear the token and user id from the local storage -thus logging out the user
   void logOut(BuildContext context) async {
     final value = await _preference;
-    value.clear();
+    // value.clear();
+    
+    value.remove("token");
+    
     PageNavigator(ctx: context).nextPageOnly(page: const LoginPage());
   }
 }

@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //databaseprovider instance
   DatabaseProvider databaseProvider = DatabaseProvider();
-  List tasks = [];
+  // List tasks = ["free", "now"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,48 +33,49 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Container(
-        padding: const EdgeInsets.all(20),
-        child: tasks.isEmpty
-            ? Center(
-                child: Column(
-                  children: [
-                    // Text('T-Do is Empty', style: TextStyle(fontSize: 20),),'),
-                    const Text(
-                      'Todo List is empty',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 15),
-                    GestureDetector(
-                      onTap: () {
-                        // PageNavigator(ctx: context)
-                        //     .nextPage(page: const CreateTaskPage());
-                      },
-                      child: Text(
-                        'Create a task',
-                        style: TextStyle(fontSize: 18, color: grey),
-                      ),
-                    ),
-                  ],
+          padding: const EdgeInsets.all(20),
+          child:
+              //tasks.isEmpty            ?
+              Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Text('T-Do is Empty', style: TextStyle(fontSize: 20),),'),
+                const Text(
+                  'Todo List is empty',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-              )
-            : ListView(
-                children: List.generate(5, (index) {
-                  return TaskField(
-                    initial: '${index + 1}',
-                    title: 'Hello world',
-                    subtitle: 'time',
-                    taskId: 'id',
-                    isCompleted: false,
-                  );
-                }),
-              ),
-      ),
+                const SizedBox(height: 15),
+                GestureDetector(
+                  // onTap: () {
+                  //   PageNavigator(ctx: context!)
+                  //       .nextPage(page: const AddTaskPage());
+                  // },
+                  child: Text(
+                    'Create a task',
+                    style: TextStyle(fontSize: 18, color: grey),
+                  ),
+                ),
+              ],
+            ),
+          )
+          // : ListView(
+          //     children: List.generate(5, (index) {
+          //       return TaskField(
+          //         initial: '${index + 1}',
+          //         title: 'Hello world',
+          //         subtitle: 'time',
+          //         taskId: 'id',
+          //         isCompleted: false,
+          //       );
+          //     }),
+          //   ),
+          ),
       floatingActionButton: FloatingActionButton(
         mini: true,
         child: const Icon(Icons.add),
         onPressed: () {
-          PageNavigator(ctx: context).nextPageOnly(page:const AddTaskPage());
+          PageNavigator(ctx: context).nextPageOnly(page: const AddTaskPage());
           // Navigator.pushNamed(context, '/add-task');
         },
       ),

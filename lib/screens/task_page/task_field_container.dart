@@ -53,7 +53,7 @@ class _TaskFieldState extends State<TaskField> {
       subtitle: Text(
         widget.subtitle!,
         style: TextStyle(
-          decoration: widget.isCompleted == true
+          decoration: widget.isCompleted == true  
               ? TextDecoration.lineThrough
               : TextDecoration.none,
         ),

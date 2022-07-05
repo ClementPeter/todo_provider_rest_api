@@ -40,8 +40,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // backgroundColor: primaryColor,
+    return Scaffold(    
       appBar: AppBar(centerTitle: true, title: const Text('Register')),
       //CustomScrollView is used to get custom scroll effect using Slivers
       body: CustomScrollView(
@@ -81,12 +80,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   Consumer<AuthenticationProvider>(
                     builder: (context, auth, snapshot) {
                       WidgetsBinding.instance!.addPostFrameCallback((_) {
-                        if (auth.responseMessage != "") {
+                        if (auth.responseMessage != " ") {
                           showMessage(
                             message: auth.responseMessage.toUpperCase(),
                             context: context,
                           );
-                          //Clears the message after displaying it
+                          //Clears the message after displaying it to avoid duplicate messages
                           auth.clear();
                         }
                       });
@@ -110,6 +109,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               email: _email.text.trim(),
                               password: _password.text.trim(),
                             );
+                            PageNavigator(ctx: context)
+                                .nextPageOnly(page: const LoginPage());
                           }
                         },
                         context: context,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_provider_rest_api/providers/auth_provider/auth_provider.dart';
 import 'package:todo_provider_rest_api/screens/authentication/register.dart';
-
 import 'package:todo_provider_rest_api/utils/router.dart';
 import 'package:todo_provider_rest_api/utils/snack_message.dart';
 import 'package:todo_provider_rest_api/widgets/button.dart';
@@ -66,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                     builder: (context, auth, child) {
                       //Prevents the consumer form contanstly checking  & diplays the response message we use the following logic
                       WidgetsBinding.instance!.addPostFrameCallback((_) {
-                        if (auth.responseMessage != "") {
+                        if (auth.responseMessage != " ") {
                           showMessage(
                             message: auth.responseMessage.toUpperCase(),
                             context: context,
