@@ -43,8 +43,10 @@ DELETE: /tasks/{taskId}
 
 
 
-Tutorial Playlist : https://www.youtube.com/playlist?list=PLpTC1FqgUpLRhzinu-4tSW4eMkxzwOEcx
-Custom Bakend Repo : https://github.com/wisdommatt/todo-list-api
+> Tutorial Playlist : https://www.youtube.com/playlist?list=PLpTC1FqgUpLRhzinu-4tSW4eMkxzwOEcx
+
+
+> Custom Bakend Repo : https://github.com/wisdommatt/todo-list-api
 
 
 ## Getting Started
