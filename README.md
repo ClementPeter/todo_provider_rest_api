@@ -28,7 +28,8 @@ DELETE: /tasks/{taskId}
 
 /users  : https://jsonplaceholder.typicode.com/users
 
-### Features Implemented
+### ✨ Features Implemented
+
 > Login and Register funtionality suing custom MongoDb Backend
 
 > API Consumption : HTTP GET,POST, Request
