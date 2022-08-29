@@ -41,7 +41,7 @@ DELETE: /tasks/{taskId}
 
 > CRUD Operation :  Add Task, Delete Task, Update Task,
 
-### Resources
+### Resources Used
 
 > Tutorial Playlist : https://www.youtube.com/playlist?list=PLpTC1FqgUpLRhzinu-4tSW4eMkxzwOEcx
 
