@@ -28,7 +28,8 @@ DELETE: /tasks/{taskId}
 
 /users  : https://jsonplaceholder.typicode.com/users
 
-### Features Implemented
+### ✨ Features Implemented
+
 > Login and Register funtionality suing custom MongoDb Backend
 
 > API Consumption : HTTP GET,POST, Request
@@ -41,10 +42,12 @@ DELETE: /tasks/{taskId}
 
 > CRUD Operation :  Add Task, Delete Task, Update Task,
 
+### Resources Used
+
+> Tutorial Playlist : https://www.youtube.com/playlist?list=PLpTC1FqgUpLRhzinu-4tSW4eMkxzwOEcx
 
 
-Tutorial Playlist : https://www.youtube.com/playlist?list=PLpTC1FqgUpLRhzinu-4tSW4eMkxzwOEcx
-Custom Bakend Repo : https://github.com/wisdommatt/todo-list-api
+> Custom Bakend Repo : https://github.com/wisdommatt/todo-list-api
 
 
 ## Getting Started
