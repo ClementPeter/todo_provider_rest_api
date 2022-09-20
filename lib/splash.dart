@@ -30,22 +30,22 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  //Splash Screen will navigate through this funCtion after a delay of 3 seconds to the Login Page
+  //Splash Screen will navigate through this function after a delay of 2 seconds to the Login Page--
+  //-- if the user has been logged in before
   void navigate() {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        // Navigate to HomePage
-        //based on whether user has loggednin before redirect user to homepage
-        databaseProvider.getToken().then((value) {
-          if (value == " ") {
-            PageNavigator(ctx: context).nextPageOnly(page: const LoginPage());
-          } else {
-            PageNavigator(ctx: context).nextPageOnly(page: const HomePage());
-          }
-        },);
-
-        //PageNavigator(ctx: context).nextPageOnly(page: const LoginPage());
+        //Navigate to HomePage, based on whether user has logged in before or redirect user to LoginPage
+        databaseProvider.getToken().then(
+          (value) {
+            if (value == " ") {
+              PageNavigator(ctx: context).nextPageOnly(page: const LoginPage());
+            } else {
+              PageNavigator(ctx: context).nextPageOnly(page: const HomePage());
+            }
+          },
+        );
       },
     );
   }

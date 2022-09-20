@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_provider_rest_api/providers/add_task_provider.dart';
 import 'package:todo_provider_rest_api/providers/auth_provider/auth_provider.dart';
 import 'package:todo_provider_rest_api/providers/database/database_provider.dart';
 import 'package:todo_provider_rest_api/splash.dart';
@@ -21,16 +22,16 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
         //Provider for storing  user details in shared preferance
         ChangeNotifierProvider(create: (_) => DatabaseProvider()),
+        //Provider for adding new task to the backend
+         ChangeNotifierProvider(create: (_) => AddTaskProvider()),
       ],
-      //
       child: MaterialApp(
         //title: 'Todo Provider Rest API',
         theme: ThemeData(
-          //TextSelectionThemeData.cursorColor(red),
           appBarTheme: AppBarTheme(color: primaryColor),
           floatingActionButtonTheme:
               FloatingActionButtonThemeData(backgroundColor: primaryColor),
-          //primarySwatch: primaryColor,
+          
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: const SplashScreen(),

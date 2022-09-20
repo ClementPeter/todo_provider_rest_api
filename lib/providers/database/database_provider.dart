@@ -3,46 +3,46 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_provider_rest_api/screens/authentication/login.dart';
 import 'package:todo_provider_rest_api/utils/router.dart';
 
-//Using shared preferences to store the user data
-//Provider for storing  user details in shared preferance fro reference purposes and usage in other screens
-
+//DatabaseProvider to save user ID and TOKEN temporarily using shared preference
+//Funtionalities include saving user data and logging out
 class DatabaseProvider extends ChangeNotifier {
-  //initialize the shared preference --returns a Future
   final Future<SharedPreferences> _preference = SharedPreferences.getInstance();
 
-  //getter -public / accessible from other classes to read value from
+  //Getters- Public variables, accessible from other classes
+
   String get token => _token;
   String get userId => _userId;
 
-  //setters --private
+  //Setters -Private variables, inaccessible from other classes
   String _token = " ";
   String _userId = " ";
 
-  //funtion to save token
+  //Funtion to save token in shared preference
   void saveToken(String token) async {
     SharedPreferences value = await _preference;
-    //saves a user token value to the 'token' key
+    //print("value from save Token : $value");
     value.setString('token', token);
-    print("Token saved $token");
+    //print("value from await save Token : $value");
   }
 
-  //function to save user id
-  void saveUserId(String id) async {
+  //Funtion to save user ID in shared preference
+  void saveUserId(String userId) async {
     SharedPreferences value = await _preference;
-    //saves a user id value to the 'id' key
-    value.setString('id', id);
-    print("Used id saved $id");
+    //print("value from save UserId : $value");
+    value.setString('userId', userId);
+    print("value from await save UserId : $value");
   }
 
-  //Funtion to get the token out of shared preference after it has been saved
-
-  Future<String> getToken() async {
+  //Function to get "saved" user Token from shared preference
+  Future getToken() async {
     SharedPreferences value = await _preference;
 
-    //check if data is available
+    // print("value from get Token : $value");
+    print("value from get Token : ${value.get(token)}");
     if (value.containsKey("token")) {
-      //get token data from local storage with shared preference
       String data = value.getString("token")!;
+
+      //print("value from await get Token : ${value.get(token)}");
       _token = data;
       notifyListeners();
       return data;
@@ -50,35 +50,33 @@ class DatabaseProvider extends ChangeNotifier {
       _token = " ";
       notifyListeners();
       return " ";
+      //return _token;
     }
   }
 
-  //Funtion to get the UserId out of shared preference after it has been saved
-
-  Future<String> getUserId() async {
+  //Function to get "saved" user ID from shared preference
+  Future getUserId() async {
     SharedPreferences value = await _preference;
-
-    if (value.containsKey("id")) {
-      String data = value.getString("id")!;
-      //set the data to the "_userId" setter
+    print("value from get UserID : $value");
+    if (value.containsKey('token')) {
+      print("value from get UserID : $value");
+      String data = value.getString('token')!;
       _userId = data;
       notifyListeners();
       return data;
     } else {
-      _userId:
-      " ";
+      _userId = " ";
       notifyListeners();
       return _userId;
     }
   }
 
-  //Function to clear the token and user id from the local storage -thus logging out the user
+  //Function to logout the user by clearing user token and ID from shared preference
   void logOut(BuildContext context) async {
     final value = await _preference;
-    // value.clear();
-    
-    value.remove("token");
-    
+    print("value from get logOut : $value");
+    value.clear();
+    print("value from get logOut after clear : $value");
     PageNavigator(ctx: context).nextPageOnly(page: const LoginPage());
   }
 }
