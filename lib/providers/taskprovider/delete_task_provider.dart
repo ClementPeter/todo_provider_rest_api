@@ -7,7 +7,7 @@ import 'package:todo_provider_rest_api/providers/database/database_provider.dart
 import 'package:todo_provider_rest_api/screens/authentication/login.dart';
 import 'package:todo_provider_rest_api/utils/router.dart';
 
-class DeleteTask extends ChangeNotifier {
+class DeleteTaskProvider extends ChangeNotifier {
   //create new databaseProvider object/instance
   final DatabaseProvider databaseProvider = DatabaseProvider();
 
@@ -23,32 +23,31 @@ class DeleteTask extends ChangeNotifier {
   String _responseMessage = " ";
 
   void deleteTask({required String taskId}) async {
-    final token = databaseProvider.getToken();
-    final userId = databaseProvider.getUserId();
-
+    final token = await databaseProvider.getToken();
+    final userId = await databaseProvider.getUserId();
     _status = true;
     notifyListeners();
 
     String deleteTaskUrl = "$baseUrl/tasks/$taskId";
 
-    try {
-      final response = await http.delete(Uri.parse(deleteTaskUrl),
-          headers: {'Authorization': 'Bearer $token'});
+    final response = await http.delete(Uri.parse(deleteTaskUrl),
+        headers: {'Authorization': 'Bearer $token'});
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final responseData = json.decode(response.body);
-        _responseMessage = responseData['message'];
-        _status = false;
-        notifyListeners();
-      } else {
-        final responseData = json.decode(response.body);
-        _responseMessage = responseData['message'];
-        _status = false;
-        notifyListeners();
-      }
-    } catch (error) {
+        
+    print("delete task status: ${response.statusCode}");
+    print("delete task status: $response");
+
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final responseData = json.decode(response.body);
+      _responseMessage = responseData['message'];
       _status = false;
-      _responseMessage = error.toString();
+      notifyListeners();
+      //
+    } else {
+      final responseData = json.decode(response.body);
+      _responseMessage = responseData['message'];
+      _status = false;
       notifyListeners();
     }
   }

@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
         //Navigate to HomePage, based on whether user has logged in before or redirect user to LoginPage
         databaseProvider.getToken().then(
           (value) {
-            if (value == " ") {
+            if (value == '') {
               PageNavigator(ctx: context).nextPageOnly(page: const LoginPage());
             } else {
               PageNavigator(ctx: context).nextPageOnly(page: const HomePage());

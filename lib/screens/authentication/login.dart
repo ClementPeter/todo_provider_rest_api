@@ -8,8 +8,8 @@ import 'package:todo_provider_rest_api/utils/snack_message.dart';
 import 'package:todo_provider_rest_api/widgets/button.dart';
 import 'package:todo_provider_rest_api/widgets/text_field.dart';
 import 'package:todo_provider_rest_api/screens/authentication/login.dart';
-//Login Page will contain 2 textfield w
 
+//Login Page will contain 2 textfield
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -19,6 +19,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   //AuthenticationProvider auth = AuthenticationProvider();
+
   //TextEdiiting Controllers for our username and Password field...we make them private varialbe with (_) so they cant be accessed form another class
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
@@ -43,9 +44,8 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(centerTitle: true, title: const Text('Login')),
       //CustomScrollView is used to get custom scroll effect using Slivers
       body: CustomScrollView(
-        //list of slivers
         slivers: [
-          //In order not nest other widgets we use sliver to box adapter
+          //list of slivers -- In order not nest other widgets we use sliver to box adapter
           SliverToBoxAdapter(
             child: Container(
               // color: amber,
@@ -57,12 +57,14 @@ class _LoginPageState extends State<LoginPage> {
                     title: 'Email',
                     hint: 'Enter your Email',
                     controller: _email,
+                  
                   ),
                   //password Textfield
                   customTextField(
                     title: 'Password',
-                    hint: 'Enter your password',
+                    hint: 'Enter your Password',
                     controller: _password,
+                    isPassword: true
                   ),
                   Consumer<AuthenticationProvider>(
                       builder: (context, auth, child) {

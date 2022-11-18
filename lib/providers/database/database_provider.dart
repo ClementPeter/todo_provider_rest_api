@@ -9,20 +9,19 @@ class DatabaseProvider extends ChangeNotifier {
   final Future<SharedPreferences> _preference = SharedPreferences.getInstance();
 
   //Getters- Public variables, accessible from other classes
-
   String get token => _token;
   String get userId => _userId;
 
   //Setters -Private variables, inaccessible from other classes
-  String _token = " ";
-  String _userId = " ";
+  String _token = '';
+  String _userId = '';
 
   //Funtion to save token in shared preference
   void saveToken(String token) async {
     SharedPreferences value = await _preference;
     //print("value from save Token : $value");
     value.setString('token', token);
-    //print("value from await save Token : $value");
+    print("value from await save Token : $value");
   }
 
   //Funtion to save user ID in shared preference
@@ -37,27 +36,23 @@ class DatabaseProvider extends ChangeNotifier {
   Future getToken() async {
     SharedPreferences value = await _preference;
 
-    // print("value from get Token : $value");
-    print("value from get Token : ${value.get(token)}");
-    if (value.containsKey("token")) {
+    if (value.containsKey('token')) {
       String data = value.getString("token")!;
-
-      //print("value from await get Token : ${value.get(token)}");
+      print("value from await get Token : ${value.get(data)}");
       _token = data;
       notifyListeners();
       return data;
     } else {
-      _token = " ";
+      _token = '';
       notifyListeners();
-      return " ";
-      //return _token;
+      return '';
     }
   }
 
   //Function to get "saved" user ID from shared preference
   Future getUserId() async {
     SharedPreferences value = await _preference;
-    print("value from get UserID : $value");
+    //print("value from get UserID : $value");
     if (value.containsKey('token')) {
       print("value from get UserID : $value");
       String data = value.getString('token')!;
@@ -65,7 +60,7 @@ class DatabaseProvider extends ChangeNotifier {
       notifyListeners();
       return data;
     } else {
-      _userId = " ";
+      _userId = '';
       notifyListeners();
       return _userId;
     }
@@ -74,9 +69,9 @@ class DatabaseProvider extends ChangeNotifier {
   //Function to logout the user by clearing user token and ID from shared preference
   void logOut(BuildContext context) async {
     final value = await _preference;
-    print("value from get logOut : $value");
+    print("value from get logOut : $value , ${value.toString()}");
     value.clear();
-    print("value from get logOut after clear : $value");
+    print("value from get logOut after clear : ${value.toString()}");
     PageNavigator(ctx: context).nextPageOnly(page: const LoginPage());
   }
 }

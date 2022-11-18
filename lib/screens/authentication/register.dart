@@ -74,6 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     title: 'password',
                     hint: 'Enter your password',
                     controller: _password,
+                    isPassword: true,
                   ),
                   //Consumer widget helps us to listen to changes in a Particular class (AuthenticationProvider)
                   Consumer<AuthenticationProvider>(

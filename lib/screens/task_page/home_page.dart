@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_provider_rest_api/providers/auth_provider/auth_provider.dart';
 import 'package:todo_provider_rest_api/providers/database/database_provider.dart';
+import 'package:todo_provider_rest_api/providers/taskprovider/get_task_service.dart';
 import 'package:todo_provider_rest_api/screens/task_page/add_task_page.dart';
 import 'package:todo_provider_rest_api/screens/task_page/local_widgets/task_field_container.dart';
 import 'package:todo_provider_rest_api/styles/colors.dart';
@@ -21,8 +22,14 @@ class _HomePageState extends State<HomePage> {
   DatabaseProvider databaseProvider = DatabaseProvider();
 
   //Empty list of tasks that accepts and loads To-Do tasks dynamically with ListTile
-  List tasks = ["free", "now"];
-  //List tasks = [];
+   List tasks = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    GetUserTask().getTask();                
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +50,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Container(
         padding: const EdgeInsets.all(8),
-        child: tasks.isEmpty
+        child: tasks.isNotEmpty
             ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

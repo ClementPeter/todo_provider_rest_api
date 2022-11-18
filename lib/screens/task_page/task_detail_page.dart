@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:todo_provider_rest_api/widgets/button.dart';
 import 'package:todo_provider_rest_api/widgets/text_field.dart';
 
@@ -21,7 +20,6 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
   @override
   void dispose() {
     // TODO: implement dispose
-
     _title.dispose();
     super.dispose();
   }
@@ -60,23 +58,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
             child: Container(
               padding: const EdgeInsets.all(15),
               child: Column(
-                children: [
-                  // TaskFieldContainer(
-                  //   initial: 'A',
-                  //   title: 'Title',
-                  //   subtitle: 'time',
-                  //   taskId: '1',
-                  //   isCompleted: false,
-                  //   //controller: _title,
-                  //   //hint: 'Enter your title',
-                  // ),
-                  // TaskFieldContainer(
-                  //   initial: widget.title,
-                  //   taskId: widget.taskId,
-                  //   isCompleted: false,
-                  //   //controller: _title,
-                  //   //hint: 'Enter your title',
-                  // ),
+                children: [ 
                   customTextField(
                     title: 'Title',
                     hint: 'what do you want to do',

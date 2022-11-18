@@ -1,3 +1,3 @@
 /*
-Model stores collection of Data that are to be used  top poplate the  the application
+Model stores collection of Data that are to be used  top populate the  the application
 */

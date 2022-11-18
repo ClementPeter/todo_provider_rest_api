@@ -10,6 +10,7 @@ Widget customTextField({
   String? hint,
   TextEditingController? controller,
   int maxLines = 1,
+  isPassword = false,
 }) {
   return Column(
     children: [
@@ -22,7 +23,7 @@ Widget customTextField({
         ),
       ),
       //TextField Section
-      Container(      
+      Container(
         alignment: Alignment.centerLeft,
         margin: const EdgeInsets.symmetric(vertical: 10),
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
@@ -34,8 +35,8 @@ Widget customTextField({
           controller: controller,
           maxLines: maxLines,
           decoration: InputDecoration(hintText: hint, border: InputBorder.none),
+          obscureText: isPassword == false ? false : true,
         ),
-        // decoration: ,
       ),
     ],
   );

@@ -9,11 +9,8 @@ import 'package:todo_provider_rest_api/screens/task_page/home_page.dart';
 import 'package:todo_provider_rest_api/utils/router.dart';
 import 'package:todo_provider_rest_api/screens/authentication/login.dart';
 
-
 //Class for Registering, Login of Users
 class AuthenticationProvider extends ChangeNotifier {
-  // final requestBaseUrl = AppUrl.baseUrl;
-
   DatabaseProvider databaseProvider = DatabaseProvider();
 
   //Getters-- Allows the class to call them
@@ -47,11 +44,6 @@ class AuthenticationProvider extends ChangeNotifier {
     };
 
     //Register User
-    http.Response req =
-        await http.post(Uri.parse(registerUrl), body: json.encode(body));
-
-    final res = json.decode(req.body);
-
     try {
       //req awaits the value from the HTTP post request
       http.Response req = await http.post(
@@ -59,21 +51,21 @@ class AuthenticationProvider extends ChangeNotifier {
         body: json.encode(body),
       );
 
-      print("status code : ${req.statusCode}");
-      print("body : ${req.body}");
+      print("auth register status code : ${req.statusCode}");
+      print("auth register body : ${req.body}");
       final res = json.decode(req.body);
+
       if (req.statusCode == 200 || req.statusCode == 201) {
-        //final res = jsonDecode(req.body);
         _isLoading = false;
         _resMessage = "Account Created";
-        print(_resMessage);
-        PageNavigator(ctx: context!).nextPage(page: const LoginPage());
         notifyListeners();
+        //print(_resMessage);
+        PageNavigator(ctx: context).nextPageOnly(page: const LoginPage());
       } else {
-        print(req.statusCode);
-        print(res["message"]);
+        print("auth register ${req.statusCode}");
+        print("auth register ${res["message"]}");
         _isLoading = false;
-        _resMessage = "Not sure if... but Error Account already exists";
+        _resMessage = "Heyy...this Account already exists";
         print(_resMessage);
         notifyListeners();
       }
@@ -83,13 +75,12 @@ class AuthenticationProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       _isLoading = false;
-      // final res = json.decode(req.body);
+      //final res = json.decode(req.body);
       // _resMessage = res['messsage'];
       //final req = json.decode(req.body);
       // _resMessage = "Error : ${req['message']}";
-
-      _resMessage = res['message'];
-      print("$_resMessage from catch (e) : $e");
+      //_resMessage = res['message'];
+      print("register : $_resMessage from catch (e) : $e");
 
       //print(':::: $e');
       notifyListeners();
@@ -125,28 +116,29 @@ class AuthenticationProvider extends ChangeNotifier {
         body: json.encode(body),
       );
 
-      print("status code : ${req.statusCode}");
-      print("body : ${req.body}");
+      print("login status code : ${req.statusCode}");
+      print("login body : ${req.body}");
       final response = json.decode(req.body);
 
       if (req.statusCode == 200 || req.statusCode == 201) {
         _resMessage = "Account Logged In";
         _isLoading = false;
         print(_resMessage);
-        //Collect and Save needed User Data (id and token) and navigate to the Homepage
-        //UserId - Needed to : check if the user logged in & updatating task
+        //Collect and Save needed User Data (id and token)  in DataBaseProvider and then navigate to the Homepage
+        //UserId - Needed to : check if the user logged in & updating task
         //token : Needed to : Add Taks to Custom Backend
         final userId = response["user"]["id"];
         final token = response["authToken"];
         databaseProvider.saveUserId(userId);
         databaseProvider.saveToken(token);
         //notifyListeners();
-      
-        PageNavigator(ctx: context!).nextPage(page: const HomePage());   //Navigates to Homepage
+
+        PageNavigator(ctx: context!)
+            .nextPage(page: const HomePage()); //Navigates to Homepage
         notifyListeners();
       } else {
         _isLoading = false;
-        _resMessage = "Error 404-Account not found";
+        _resMessage = "Invalid Username or Password";
         print(_resMessage);
         notifyListeners();
       }
@@ -165,10 +157,9 @@ class AuthenticationProvider extends ChangeNotifier {
     }
   }
 
-  //Function to clear the response message 
+  //Function to clear the response message
   void clear() {
-    _resMessage = " ";
+    _resMessage = '';
     notifyListeners();
   }
 }
-
