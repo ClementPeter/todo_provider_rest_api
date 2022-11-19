@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => DatabaseProvider()),
         //Provider for adding new task from the app to the backend
         ChangeNotifierProvider(create: (_) => AddTaskProvider()),
-        //Provider for deleting new task from the backend
+        //Provider for deleting task from the backend
         ChangeNotifierProvider(create: (_) => DeleteTaskProvider())
       ],
       child: MaterialApp(

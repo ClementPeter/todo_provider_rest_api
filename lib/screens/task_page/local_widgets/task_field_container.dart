@@ -20,7 +20,8 @@ class TaskFieldContainer extends StatefulWidget {
   final String? subtitle;
   final String? taskId;
   final String? initial;
-  bool? isCompleted; //check if the task has been done
+  bool?
+      isCompleted; //check if the task has been done : fase-not completed; true completed
 
   @override
   State<TaskFieldContainer> createState() => _TaskFieldContainerState();
@@ -32,6 +33,15 @@ class _TaskFieldContainerState extends State<TaskFieldContainer> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
+        onTap: () {
+          //Ontap TaskFieldContainer (ListTile)...navigate to TaskDetailsPage and pass title and Id
+          PageNavigator(ctx: context).nextPage(
+            page: TaskDetailsPage(
+              title: widget.title,
+              taskId: widget.taskId,
+            ),
+          );
+        },
         tileColor: lightGrey,
         leading: CircleAvatar(
           //foregroundColor: Colors.red,
@@ -76,14 +86,6 @@ class _TaskFieldContainerState extends State<TaskFieldContainer> {
                 widget.isCompleted == true ? green : grey.withOpacity(0.5),
           ),
         ),
-        onTap: () {
-          //Ontap TaskFieldContainer (ListTile)...navigate to TaskDetailsPage and pass title and Id
-          PageNavigator(ctx: context).nextPage(
-              page: TaskDetailsPage(
-            title: widget.title,
-            taskId: widget.taskId,
-          ));
-        },
       ),
     );
   }

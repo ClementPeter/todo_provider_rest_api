@@ -30,7 +30,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
     super.initState();
     setState(
       () {
-        //Populating the task detail page with "Title" data from the taskfield container when clicked on
+        //Populating the task detail page with "Title" data from the taskfield container when clicked upon
         _title.text = widget.title!;
       },
     );
@@ -46,8 +46,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
           IconButton(
             icon: const Icon(Icons.delete),
             onPressed: () {
-              // databaseProvider.logOut(context);
-              //AuthProvider.of(context).logout();
+     
             },
           ),
         ],

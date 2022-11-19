@@ -7,6 +7,7 @@ import 'package:todo_provider_rest_api/providers/database/database_provider.dart
 import 'package:todo_provider_rest_api/screens/authentication/login.dart';
 import 'package:todo_provider_rest_api/utils/router.dart';
 
+//Provider class to delete tasks
 class DeleteTaskProvider extends ChangeNotifier {
   //create new databaseProvider object/instance
   final DatabaseProvider databaseProvider = DatabaseProvider();
@@ -20,11 +21,12 @@ class DeleteTaskProvider extends ChangeNotifier {
 
   //Setters-- use to change values in the class anad called by the getters
   bool _status = false;
-  String _responseMessage = " ";
+  String _responseMessage = '';
 
-  void deleteTask({required String taskId}) async {
+  //Function to Delete Task to the database / backend API - DELETE request
+  void deleteTask({String? taskId, BuildContext? ctx}) async {
     final token = await databaseProvider.getToken();
-    final userId = await databaseProvider.getUserId();
+    // final userId = await databaseProvider.getUserId();
     _status = true;
     notifyListeners();
 
@@ -33,10 +35,8 @@ class DeleteTaskProvider extends ChangeNotifier {
     final response = await http.delete(Uri.parse(deleteTaskUrl),
         headers: {'Authorization': 'Bearer $token'});
 
-        
     print("delete task status: ${response.statusCode}");
     print("delete task status: $response");
-
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final responseData = json.decode(response.body);

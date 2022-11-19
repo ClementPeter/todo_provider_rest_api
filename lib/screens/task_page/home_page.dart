@@ -22,13 +22,12 @@ class _HomePageState extends State<HomePage> {
   DatabaseProvider databaseProvider = DatabaseProvider();
 
   //Empty list of tasks that accepts and loads To-Do tasks dynamically with ListTile
-   List tasks = [];
+  List tasks = [];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    GetUserTask().getTask();                
-
+    GetUserTask().getTask();
   }
 
   @override
@@ -67,8 +66,9 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(fontSize: 18, color: grey),
                       ),
                       onTap: () {
-                        PageNavigator(ctx: context)
-                            .nextPage(page: const AddTaskPage());
+                        PageNavigator(ctx: context).nextPage(
+                          page: const AddTaskPage(),
+                        );
                       },
                     ),
                   ],
@@ -94,13 +94,6 @@ class _HomePageState extends State<HomePage> {
         child: const Icon(Icons.add),
         onPressed: () {
           PageNavigator(ctx: context).nextPage(page: const AddTaskPage());
-
-          //    Navigator.push(
-          // context,
-          // PageRouteBuilder(
-          //   pageBuilder: (context, a, b) => const AddTaskPage(),
-          // );
-          // Navigator.push(context, MaterialPageRoute(builder: AddTaskPage()))
         },
       ),
     );

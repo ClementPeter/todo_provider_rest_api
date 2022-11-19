@@ -6,8 +6,7 @@ import 'package:todo_provider_rest_api/widgets/button.dart';
 import 'package:todo_provider_rest_api/widgets/text_field.dart';
 
 //Create task page enables the user to add ToDo to the app
-
-//You be beginner and you dey happy as GitHub co-pilot dey give you code suggestions...issokay
+//You just dey start work and you dey happy as GitHub co-pilot dey give you code suggestions..."clap" issokay
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({Key? key}) : super(key: key);

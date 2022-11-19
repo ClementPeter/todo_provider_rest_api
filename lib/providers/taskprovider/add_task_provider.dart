@@ -24,7 +24,7 @@ class AddTaskProvider extends ChangeNotifier {
   bool get status => _status;
   String get responseMessage => _responseMessage;
 
-  //Function to Add Task to the database / backend API
+  //Function to Add Task to the database / backend API - POST request
   void addTask({String? title}) async {
     //get Token and User Id from shared Preference
     final token = await databaseProvider.getToken();

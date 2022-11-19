@@ -20,9 +20,7 @@ class GetUserTask {
       print(request.statusCode);
 
       if (request.statusCode == 200 || request.statusCode == 201) {
-        print(request.body);
-        //
-
+        print(request.body);       
       }
     } catch (e) {
       print(e); 

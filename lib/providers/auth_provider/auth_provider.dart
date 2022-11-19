@@ -134,7 +134,7 @@ class AuthenticationProvider extends ChangeNotifier {
         //notifyListeners();
 
         PageNavigator(ctx: context!)
-            .nextPage(page: const HomePage()); //Navigates to Homepage
+            .nextPageOnly(page: const HomePage()); //Navigates to Homepage
         notifyListeners();
       } else {
         _isLoading = false;

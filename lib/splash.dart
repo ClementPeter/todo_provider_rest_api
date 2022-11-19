@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
   //-- if the user has been logged in before
   void navigate() {
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 3),
       () {
         //Navigate to HomePage, based on whether user has logged in before or redirect user to LoginPage
         databaseProvider.getToken().then(
